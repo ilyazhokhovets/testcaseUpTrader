@@ -1,0 +1,42 @@
+
+{% load menu_tag %}
+<h3>
+<a href="/">{{ name }}:</a></h3>
+{% for field in menu %}
+
+{% if field.1.level > field.0.level %}
+     <ul>
+    <li>
+    <a href="/{{ field.1.url }}">{{ field.1.name }}</a>
+{% endif %}
+
+
+    {% if field.1.level == field.0.level %}
+    <li>
+    <a href="/{{ field.1.url }}">{{ field.1.name }}</a>
+    </li>
+    {% endif %}
+
+
+        {% if field.1.level < field.0.level %}
+       {% binary_range field.1.level field.0.level as range%}
+            {% for i in range %}
+                </ul>
+                </li>
+            {% endfor %}
+    <li>
+    <a href="/{{ field.1.url }}">{{ field.1.name }}</a>
+    </li>
+    {% endif %}
+
+    {% if forloop.last %}
+        {% binary_range '0' field.1.level as range%}
+            {% for i in range %}
+                </ul>
+                </li>
+            {% endfor %}
+    {% endif %}
+
+
+
+    {% endfor %}
