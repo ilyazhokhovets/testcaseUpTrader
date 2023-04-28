@@ -4,7 +4,7 @@ from .models import *
 from django.db.models import Q
 # Create your views here.
 
-def menu(request):
+def home(request):
 
     return render(request, 'menu/main.html')
 
